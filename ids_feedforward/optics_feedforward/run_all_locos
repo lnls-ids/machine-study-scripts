@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+var=$(ls loco_input_IVU_EMA_ACORM_$1*.pickle)
+
+echo $var
+for fol in $var
+do
+    foli=${fol:11:-7}
+    if [ -e $foli ]
+    then
+        printf "\n"$foli" already exists\n\n"
+    else
+        printf "\n"$foli"\n\n"
+        ./run_loco.py $fol
+        mkdir $foli
+#        mv *.png *.pdf *.txt quad_family_average.pickle 6d_K*.pickle fitting_*.pickle $foli/
+        mv fitting_*.pickle $foli/
+    fi
+done
